@@ -14,9 +14,13 @@ then
   -l)
      [ -d './src' ] && [ -d './bin' ] && gd -L _objs -o bin/main || exit
    ;;
+  -u)
+     go get code.googlecode.com/godag
+   ;;
   *)
-    echo $"Usage: $0 {-t   test|-c  create src dir|-l  link and output the bin}"
+    echo $"Usage: $0 {-t   test|-c  create src dir|-l  link and output the bin |-u upgrade godag}"
     exit 1
+  ;;
   esac
 fi
 
@@ -25,7 +29,7 @@ fi
 
 [ ! -d './bin' ] &&  mkdir bin
 
-[ -f 'bin/main' ] && gd -L _objs -o bin/main || echo "no .go file"  && exit
+[ -d './bin' ] && gd -L _objs -o bin/main || echo "no .go file"  && exit
 
 echo "**run-output:>"
 ret=$(bin/main)
